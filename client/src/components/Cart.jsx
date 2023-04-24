@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import CartPrice from './CartPrice';
 import '../css/cart.css'
@@ -12,6 +11,7 @@ function Cart(props) {
   const  [cartItems,setCartItems]=useState([])
   let total=0;
   
+  
   useEffect(()=>{
     const fetchdata=async()=>{
     await dispatch(actionCreators.loadCarts())
@@ -24,6 +24,14 @@ function Cart(props) {
     setCartItems(carts)
   },[carts])
 
+  cartItems.map(ele=>{
+    total=total+ele.quantity
+  })
+  console.log("total",total);
+
+  props.quantityHandler(total)
+
+  
   const dispatch=useDispatch();
 
 
@@ -46,7 +54,7 @@ function Cart(props) {
         total=total+ele.quantity
       })
      
-      props.quantityHandler(total)
+      // props.quantityHandler(total={total})
       dispatch(actionCreators.cartHandler({id:ele.id,sign:1}))
       setCartItems(updateItems)
     })
@@ -82,7 +90,7 @@ function Cart(props) {
   updateItems.map(ele=>{
     total=total+ele.quantity
   })
-  props.quantityHandler(total)
+  // props.quantityHandler(total)
   dispatch(actionCreators.cartHandler({id:ele.id,sign:-1}))
   if(updateItem.quantity>0)
   setCartItems(updateItems)
@@ -130,7 +138,7 @@ function Cart(props) {
 
   return (
     <div>
-    <Navbar/>
+    <Navbar quantity={total}/>
     <div className='cartGrid'>
       <div className='cartContainer'>
         <div className='cartWrapper'>

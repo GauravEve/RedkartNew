@@ -1,5 +1,6 @@
 .gridTopContainer{
     position: sticky;
+    width: 1440px;
     top: 0;
     background-color: #007bff;
     display: flex;
@@ -14,11 +15,13 @@
 }
 
 .cartNumber{
-    width: 20px;
+    width: 24px;
+    font-size: small;
     z-index:auto;
     color:white;
     padding-left:4px;
     margin-left:5px;
+    height: 25px;
     border: 2px solid white;
     border-radius: 5px;
 }
